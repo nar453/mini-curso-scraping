@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Curso de Web Scraping</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7fafc;
+      color: #2d3748;
+    }
+    header {
+      background-color: #2c5282;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 4px solid #2b6cb0;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .session {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+    .session:hover {
+      transform: translateY(-4px);
+    }
+    h2 {
+      color: #2c5282;
+    }
+    pre {
+      background: #edf2f7;
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 8px;
+    }
+    a {
+      color: #2b6cb0;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #718096;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mini Curso de Web Scraping con Python</h1>
+    <p>Aprende paso a paso cómo extraer datos de páginas web</p>
+  </header>
+  <main>
+    <div class="session">
+      <h2>Sesión 1: Fundamentos del HTML</h2>
+      <p>Aprende qué es HTML y cómo inspeccionar el contenido de una página web. Usa la herramienta de "Inspeccionar" del navegador.</p>
+      <p><strong>Recurso:</strong> <a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank">Guía HTML MDN</a></p>
+    </div>
+
+    <div class="session">
+      <h2>Sesión 2: Instalación de Python y entorno</h2>
+      <ul>
+        <li>Instala Python desde <a href="https://www.python.org" target="_blank">python.org</a></li>
+        <li>Instala Thonny o VS Code como editor</li>
+      </ul>
+      <pre><code>print("¡Hola, web scraping!")</code></pre>
+      <p>Practica en <a href="https://www.learnpython.org/" target="_blank">LearnPython.org</a></p>
+    </div>
+
+    <div class="session">
+      <h2>Sesión 3: Primer scraping con BeautifulSoup</h2>
+      <p>Instala las bibliotecas necesarias:</p>
+      <pre><code>pip install requests beautifulsoup4</code></pre>
+      <p>Ejemplo básico:</p>
+      <pre><code>import requests
+from bs4 import BeautifulSoup
+
+url = "https://quotes.toscrape.com/"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+quotes = soup.find_all('span', class_='text')
+for quote in quotes:
+    print(quote.text)</code></pre>
+    </div>
+
+    <div class="session">
+      <h2>Sesión 4: Guardar datos en CSV</h2>
+      <p>Extrae autores y guarda los datos:</p>
+      <pre><code>import csv
+
+quotes = soup.find_all('span', class_='text')
+authors = soup.find_all('small', class_='author')
+
+with open('quotes.csv', 'w', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f)
+    writer.writerow(['Cita', 'Autor'])
+    for quote, author in zip(quotes, authors):
+        writer.writerow([quote.text.strip(), author.text.strip()])</code></pre>
+    </div>
+
+    <div class="session">
+      <h2>Sesión 5: Paginación automática</h2>
+      <p>Recorre todas las páginas disponibles:</p>
+      <pre><code>page = 1
+while True:
+    url = f"https://quotes.toscrape.com/page/{page}/"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    quotes = soup.find_all('span', class_='text')
+    if not quotes:
+        break
+
+    for quote in quotes:
+        print(quote.text)
+
+    page += 1</code></pre>
+      <p><strong>Nota:</strong> Siempre revisa los términos de uso del sitio antes de hacer scraping.</p>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 Mini Curso de Scraping. Desarrollado por ChatGPT y Lydia.
+  </footer>
+</body>
+</html>
