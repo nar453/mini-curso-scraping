@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini Curso de Web Scraping</title>
+  <title>Mini Cursos de Web Scraping</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -23,6 +23,17 @@
     h1 {
       margin: 0;
       font-size: 2rem;
+    }
+    nav {
+      background-color: #e2e8f0;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #2b6cb0;
+      font-weight: bold;
     }
     main {
       padding: 2rem;
@@ -66,32 +77,38 @@
 </head>
 <body>
   <header>
-    <h1>Mini Curso de Web Scraping con Python</h1>
-    <p>Aprende paso a paso cómo extraer datos de páginas web</p>
+    <h1>Mini Cursos de Web Scraping</h1>
+    <p>Explora dos formas de hacer scraping: con código (Python) o sin código (Octoparse)</p>
   </header>
+  <nav>
+    <a href="#python">Curso con Python</a>
+    <a href="#octoparse">Curso con Octoparse</a>
+  </nav>
   <main>
-    <div class="session">
-      <h2>Sesión 1: Fundamentos del HTML</h2>
-      <p>Aprende qué es HTML y cómo inspeccionar el contenido de una página web. Usa la herramienta de "Inspeccionar" del navegador.</p>
-      <p><strong>Recurso:</strong> <a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank">Guía HTML MDN</a></p>
-    </div>
+    <section id="python">
+      <h2>Curso de Web Scraping con Python</h2>
 
-    <div class="session">
-      <h2>Sesión 2: Instalación de Python y entorno</h2>
-      <ul>
-        <li>Instala Python desde <a href="https://www.python.org" target="_blank">python.org</a></li>
-        <li>Instala Thonny o VS Code como editor</li>
-      </ul>
-      <pre><code>print("¡Hola, web scraping!")</code></pre>
-      <p>Practica en <a href="https://www.learnpython.org/" target="_blank">LearnPython.org</a></p>
-    </div>
+      <div class="session">
+        <h3>Sesión 1: Fundamentos del HTML</h3>
+        <p>Aprende qué es HTML y cómo inspeccionar el contenido de una página web. Usa la herramienta de "Inspeccionar" del navegador.</p>
+        <p><strong>Recurso:</strong> <a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank">Guía HTML MDN</a></p>
+      </div>
 
-    <div class="session">
-      <h2>Sesión 3: Primer scraping con BeautifulSoup</h2>
-      <p>Instala las bibliotecas necesarias:</p>
-      <pre><code>pip install requests beautifulsoup4</code></pre>
-      <p>Ejemplo básico:</p>
-      <pre><code>import requests
+      <div class="session">
+        <h3>Sesión 2: Instalación de Python y entorno</h3>
+        <ul>
+          <li>Instala Python desde <a href="https://www.python.org" target="_blank">python.org</a></li>
+          <li>Instala Thonny o VS Code como editor</li>
+        </ul>
+        <pre><code>print("¡Hola, web scraping!")</code></pre>
+        <p>Practica en <a href="https://www.learnpython.org/" target="_blank">LearnPython.org</a></p>
+      </div>
+
+      <div class="session">
+        <h3>Sesión 3: Primer scraping con BeautifulSoup</h3>
+        <p>Instala las bibliotecas necesarias:</p>
+        <pre><code>pip install requests beautifulsoup4</code></pre>
+        <pre><code>import requests
 from bs4 import BeautifulSoup
 
 url = "https://quotes.toscrape.com/"
@@ -101,12 +118,11 @@ soup = BeautifulSoup(response.text, 'html.parser')
 quotes = soup.find_all('span', class_='text')
 for quote in quotes:
     print(quote.text)</code></pre>
-    </div>
+      </div>
 
-    <div class="session">
-      <h2>Sesión 4: Guardar datos en CSV</h2>
-      <p>Extrae autores y guarda los datos:</p>
-      <pre><code>import csv
+      <div class="session">
+        <h3>Sesión 4: Guardar datos en CSV</h3>
+        <pre><code>import csv
 
 quotes = soup.find_all('span', class_='text')
 authors = soup.find_all('small', class_='author')
@@ -116,12 +132,11 @@ with open('quotes.csv', 'w', newline='', encoding='utf-8') as f:
     writer.writerow(['Cita', 'Autor'])
     for quote, author in zip(quotes, authors):
         writer.writerow([quote.text.strip(), author.text.strip()])</code></pre>
-    </div>
+      </div>
 
-    <div class="session">
-      <h2>Sesión 5: Paginación automática</h2>
-      <p>Recorre todas las páginas disponibles:</p>
-      <pre><code>page = 1
+      <div class="session">
+        <h3>Sesión 5: Paginación automática</h3>
+        <pre><code>page = 1
 while True:
     url = f"https://quotes.toscrape.com/page/{page}/"
     response = requests.get(url)
@@ -135,8 +150,56 @@ while True:
         print(quote.text)
 
     page += 1</code></pre>
-      <p><strong>Nota:</strong> Siempre revisa los términos de uso del sitio antes de hacer scraping.</p>
-    </div>
+        <p><strong>Nota:</strong> Siempre revisa los términos de uso del sitio antes de hacer scraping.</p>
+      </div>
+    </section>
+
+    <section id="octoparse">
+      <h2>Curso de Web Scraping con Octoparse</h2>
+
+      <div class="session">
+        <h3>Sesión 1: ¿Qué es Octoparse?</h3>
+        <p>Octoparse es una herramienta visual para hacer scraping sin programar. Permite seleccionar elementos, extraer datos y automatizar tareas fácilmente.</p>
+        <p>Descárgalo desde: <a href="https://www.octoparse.com/download" target="_blank">octoparse.com</a></p>
+      </div>
+
+      <div class="session">
+        <h3>Sesión 2: Crear tu primera tarea</h3>
+        <ol>
+          <li>Abre Octoparse y selecciona "Modo rápido".</li>
+          <li>Ingresa una URL, por ejemplo: <code>https://books.toscrape.com</code></li>
+          <li>Octoparse detectará automáticamente los datos en la página.</li>
+          <li>Elige los elementos que deseas extraer (títulos, precios, etc.).</li>
+          <li>Haz clic en "Extraer datos".</li>
+        </ol>
+      </div>
+
+      <div class="session">
+        <h3>Sesión 3: Exportar los datos</h3>
+        <ul>
+          <li>Haz clic en "Exportar"</li>
+          <li>Elige el formato (CSV, Excel, JSON, etc.)</li>
+          <li>Guarda los datos localmente</li>
+        </ul>
+      </div>
+
+      <div class="session">
+        <h3>Sesión 4: Uso de plantillas</h3>
+        <p>Octoparse ofrece plantillas prediseñadas para sitios populares como Amazon, Twitter, LinkedIn:</p>
+        <ul>
+          <li>Haz clic en "Plantillas"</li>
+          <li>Selecciona la plataforma</li>
+          <li>Ingresa tus parámetros (palabras clave, categoría, ciudad, etc.)</li>
+          <li>Ejecuta la tarea y obtén los resultados</li>
+        </ul>
+      </div>
+
+      <div class="session">
+        <h3>Sesión 5: Consideraciones éticas y legales</h3>
+        <p>Antes de hacer scraping, revisa los términos de uso del sitio web. No extraigas datos personales sin permiso y evita sobrecargar servidores con muchas solicitudes.</p>
+        <p>Consulta: <a href="https://www.octoparse.com/blog/is-web-scraping-legal" target="_blank">¿Es legal el scraping?</a></p>
+      </div>
+    </section>
   </main>
   <footer>
     &copy; 2025 Mini Curso de Scraping. Desarrollado por ChatGPT y Natalia Rocha; is licensed under CC BY-NC-SA 4.0
